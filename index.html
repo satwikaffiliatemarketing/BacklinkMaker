@@ -1,0 +1,215 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+
+<style>
+  
+
+
+form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px 0 0 5px;
+}
+
+button[type="button"] {
+  padding: 10px 20px;
+  font-size: 14px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+
+button[type="button"]:hover {
+  background-color: #3e8e41;
+}
+
+table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #ddd;
+}
+
+.success {
+  color: green;
+}
+
+@media only screen and (max-width: 600px) {
+  form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  input[type="text"],
+  button[type="button"] {
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+}
+
+  </style>
+  <form>
+    <input type="text" id="website-input" placeholder="Enter website URL">
+    <button type="button" id="generate-button">Generate Backlinks</button>
+  </form>
+  <div id="backlinks-table"></div>
+  <script>
+    const backlinksList = [
+      "http://www.builtwith.com/google.com",
+      "http://validator.w3.org/check?uri=google.com",
+"http://whois.tools4noobs.com/info/google.com",
+"http://www.alexa.com/siteinfo/google.com",
+"http://www.alexa.com/data/details/?url=google.com",
+"http://www.aboutdomain.org/backlinks/google.com/",
+"http://www.robtex.com/dns/google.com.html",
+"http://www.quantcast.com/google.com",
+"http://uptime.netcraft.com/up/graph?site=google.com",
+"http://www.pageheat.com/heat/google.com",
+"http://www.aboutthedomain.com/google.com",
+"http://websiteshadow.com/google.com",
+"http://www.surcentro.com/en/info/google.com",
+"http://www.onlinewebcheck.com/check.php?url=google.com",
+"http://websitevaluecalculator.org/google.com",
+"http://statswebsites.com/google.com",
+"http://whoisx.co.uk/google.com",
+"http://www.websiteaccountant.nl/google.com",
+"http://www.talkreviews.ro/google.com",
+"http://www.listenarabic.com/search?q=google.com&sa=Search",
+"http://www.keywordspy.com/research/search.aspx?q=google.com&tab=domain-overview",
+"http://boardreader.com/linkinfo/google.com",
+"http://builtwith.com/google.com",
+"http://www.websiteaccountant.be/google.com",
+"http://www.altavista.com/yhs/search?fr=altavista&itag=ody&kgs=0&kls=0&q=site:google.com",
+"http://www.consultanta-seo.ro/results/google.com",
+"http://siteanalytics.compete.com/google.com/",
+"http://wholinkstome.com/url/google.com",
+"http://www.serpanalytics.com/#competitor/google.com/summary//1",
+"http://www.pagerankplace.com/website/google.com",
+"http://hosts-file.net/default.asp?s=google.com",
+"http://whois.domaintools.com/google.com",
+"http://www.folkd.com/detail/google.com",
+"http://script3.prothemes.biz/google.com",
+"http://www.who.is/whois/google.com",
+"http://www.websitedown.info/google.com",
+"http://www.worthofweb.com/website-value/google.com",
+
+"http://www.siteworthtraffic.com/report/google.com",
+"http://hqindex.org/google.com",
+"https://valueanalyze.com/show.php?url=google.com",
+"http://www.domainwhoisinfo.com/google.com",
+"http://howmuchdomainnameworth.com/process.php?q=google.com",
+"http://toolbar.netcraft.com/site_report?url=google.com",
+"https://semrush.com/info/google.com",
+"http://www.siteranker.com/TrankTrend.aspx?url=google.com",
+"https://website.ip-adress.com/google.com",
+"http://web.horde.to/google.com",
+"https://www.woorank.com/en/www/google.com",
+"http://scamanalyze.com/check/google.com",
+"http://www.infositeshow.com/sites/google.com",
+"http://www.serpanalytics.com/sites/google.com",
+"http://www.ultimate-rihanna.com/?url=google.com",
+"http://ranking.websearch.com/siteinfo.aspx?url=google.com",
+"https://deviantart.com/users/outgoing?google.com",
+"https://proza.ru/go/google.com",
+"https://webwiki.de/google.com",
+"http://www.viewwhois.com/google.com",
+"http://w3seo.info/WSZScore/google.com",
+"http://www.talkreviews.com/google.com",
+"http://archive.is/google.com",
+"http://ranking.crawler.com/SiteInfo.aspx?url=google.com",
+"http://dig.do/google.com",
+"http://web.archive.org/web/*/google.com",
+"http://www.websitelooker.net/www/google.com",
+"http://whois.phurix.co.uk/google.com",
+"https://dnswhois.info/google.com",
+"https://rbls.org/google.com",
+"https://stuffgate.com/google.com",
+"https://whois.de/google.com",
+"https://statscrop.com/www/google.com",
+"https://evi.com/q/google.com",
+"https://similarto.us/google.com",
+"https://mywot.com/en/scorecard/google.com",
+"https://whoislookupdb.com/whois-google.com",
+"http://website.informer.com/google.com"
+
+
+
+      
+      // ...
+    ];
+  
+    const generateBacklinksTable = (website) => {
+      let backlinksTable = `<table>
+        <tr>
+          <th>#</th>
+          <th>Backlink</th>
+          <th>Status</th>
+        </tr>
+      `;
+  
+      for (let i = 0; i < backlinksList.length; i++) {
+        backlinksTable += `
+          <tr style="display: none;">
+            <td>${i + 1}</td>
+            <td><a href="${backlinksList[i].replace("google.com", website)}" target="_blank">${backlinksList[i].replace("google.com", website)}</a></td>
+            <td><i class="fa fa-check success"></i></td>  `;
+  }
+
+  backlinksTable += `</table>`;
+
+  return backlinksTable;
+};
+
+    
+    document.getElementById("generate-button").addEventListener("click", function () {
+      const websiteInput = document.getElementById("website-input").value;
+      if (websiteInput.startsWith("http://") || websiteInput.startsWith("https://")) {
+        document.getElementById("backlinks-table").innerHTML = "Error: Please enter a valid domain name without the http or https.";
+        return;
+      }
+      const website = websiteInput.split("/")[0];
+      if (!website.includes(".")) {
+        document.getElementById("backlinks-table").innerHTML = "Error: Please enter a valid domain name.";
+        return;
+      }
+      const backlinksTable = generateBacklinksTable(website);
+      document.getElementById("backlinks-table").innerHTML = backlinksTable;
+    
+      // Loading table slowly from top to bottom
+      const rows = document.querySelectorAll("#backlinks-table table tr");
+      let i = 0;
+      const interval = setInterval(function () {
+        if (i === rows.length) {
+          clearInterval(interval);
+          return;
+        }
+        rows[i].style.display = "table-row";
+        i++;
+      }, 500);
+    });
+    
+     </script>
